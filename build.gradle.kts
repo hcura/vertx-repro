@@ -27,7 +27,7 @@ dependencies {
     implementation("io.vertx:vertx-grpcio-server")
     implementation("io.vertx:vertx-grpcio-client")
     // TODO -> WORKS WITHOUT THIS / FAILS WITH THIS
-//    implementation("io.vertx:vertx-grpcio-context-storage")
+    implementation("io.vertx:vertx-grpcio-context-storage")
     implementation("io.grpc:grpc-api")
     implementation("io.grpc:grpc-protobuf")
     implementation("io.grpc:grpc-stub")
