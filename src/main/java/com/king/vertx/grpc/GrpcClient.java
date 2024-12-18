@@ -2,10 +2,9 @@ package com.king.vertx.grpc;
 
 import com.king.vertx.Request;
 import com.king.vertx.SampleGrpc;
-import io.vertx.core.Vertx;
-import io.vertx.core.net.SocketAddress;
-import io.vertx.grpc.common.GrpcReadStream;
-import io.vertx.grpcio.client.GrpcIoClient;
+import io.grpc.Grpc;
+import io.grpc.InsecureChannelCredentials;
+import io.grpc.StatusRuntimeException;
 
 public class GrpcClient {
     public static void main(String[] args) {
@@ -13,20 +12,15 @@ public class GrpcClient {
     }
 
     private void start() {
-        var vertx = Vertx.vertx();
-        var client = GrpcIoClient.client(vertx);
+        var channel = Grpc.newChannelBuilder("localhost:8081", InsecureChannelCredentials.create()).build();
 
-        var server = SocketAddress.inetSocketAddress(8081, "localhost");
+        var stub = SampleGrpc.newBlockingStub(channel);
 
-        client.request(server, SampleGrpc.getUnaryMethod())
-                .compose(request -> {
-                    request.end(Request
-                            .newBuilder()
-                            .setValue("Test")
-                            .build());
-                    return request.response().compose(GrpcReadStream::last);
-                })
-                .onSuccess(reply -> System.out.println("Received " + reply.getValue()))
-                .await();
+        try {
+            var response = stub.unary(Request.newBuilder().setValue("test").build());
+            System.out.println(response.getValue());
+        } catch (StatusRuntimeException sre) {
+            System.out.println(sre.getMessage());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.king.vertx.grpc;
 
+import io.grpc.ServerInterceptors;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.grpcio.server.GrpcIoServer;
@@ -23,7 +24,9 @@ public class GrpcServer {
         var grpcServer = GrpcIoServer.server(vertx);
 
         var sampleService = new SampleService();
-        GrpcIoServiceBridge.bridge(sampleService.bindService()).bind(grpcServer);
+        var intercepted = ServerInterceptors.intercept(sampleService, new SampleInterceptor());
+
+        GrpcIoServiceBridge.bridge(intercepted).bind(grpcServer);
 
         router.route().consumes("application/grpc")
                 .handler(routingContext -> {

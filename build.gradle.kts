@@ -26,12 +26,16 @@ dependencies {
     implementation("io.vertx:vertx-web")
     implementation("io.vertx:vertx-grpcio-server")
     implementation("io.vertx:vertx-grpcio-client")
+    // TODO -> WORKS WITHOUT THIS / FAILS WITH THIS
+//    implementation("io.vertx:vertx-grpcio-context-storage")
     implementation("io.grpc:grpc-api")
     implementation("io.grpc:grpc-protobuf")
     implementation("io.grpc:grpc-stub")
 
     // required - this is going to be fixed soon in grpc
     compileOnly("javax.annotation:javax.annotation-api:1.3.2")
+
+    runtimeOnly("io.grpc:grpc-netty-shaded")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
