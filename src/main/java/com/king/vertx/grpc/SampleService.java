@@ -12,7 +12,7 @@ public class SampleService extends SampleGrpc.SampleImplBase {
 
     @Override
     public void unary(Request request, StreamObserver<Response> responseObserver) {
-        System.out.println("unary request");
+        System.out.println("GRPC: unary request");
 
         var currentContext = CONTEXT_LOCAL.get(Vertx.currentContext());
         if (currentContext != null) {

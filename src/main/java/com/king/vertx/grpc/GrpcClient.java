@@ -11,16 +11,16 @@ public class GrpcClient {
         new GrpcClient().start();
     }
 
-    private void start() {
+    public void start() {
         var channel = Grpc.newChannelBuilder("localhost:8081", InsecureChannelCredentials.create()).build();
 
         var stub = SampleGrpc.newBlockingStub(channel);
 
         try {
             var response = stub.unary(Request.newBuilder().setValue("test").build());
-            System.out.println(response.getValue());
+            System.out.println("Client: " + response.getValue());
         } catch (StatusRuntimeException sre) {
-            System.out.println(sre.getMessage());
+            System.out.println("Client: " + sre.getMessage());
         }
     }
 }

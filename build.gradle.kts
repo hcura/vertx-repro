@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation(enforcedPlatform("io.grpc:grpc-bom:1.69.0"))
-    implementation(platform("io.vertx:vertx-stack-depchain:5.0.0.CR3"))
+    implementation(platform("io.vertx:vertx-stack-depchain:5.0.0.CR5"))
 
     implementation("io.vertx:vertx-core")
     implementation("io.vertx:vertx-web")
