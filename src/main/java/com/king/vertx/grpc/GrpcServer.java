@@ -36,8 +36,8 @@ public class GrpcServer {
             // grpc
             var grpcServer = GrpcIoServer.server(vertx);
 
-            var sampleService = new SampleService();
-            var intercepted = ServerInterceptors.intercept(sampleService, new SampleInterceptor());
+//            var intercepted = ServerInterceptors.intercept(new VertxContextService(), new InterceptorWithVertxContext());
+            var intercepted = ServerInterceptors.intercept(new GrpcContextService(), new InterceptorWithGrpcContext());
 
             GrpcIoServiceBridge.bridge(intercepted).bind(grpcServer);
 

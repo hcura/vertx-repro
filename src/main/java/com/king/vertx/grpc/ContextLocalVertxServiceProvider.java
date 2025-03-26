@@ -9,7 +9,7 @@ import io.vertx.core.spi.context.storage.ContextLocal;
  */
 public class ContextLocalVertxServiceProvider implements VertxServiceProvider {
 
-  public static final ContextLocal<CurrentContext> CONTEXT_LOCAL = ContextLocal.registerLocal(CurrentContext.class);
+  public static final ContextLocal<CurrentContext> CUSTOM_CONTEXT_LOCAL = ContextLocal.registerLocal(CurrentContext.class);
 
   @Override
   public void init(VertxBootstrap builder) {

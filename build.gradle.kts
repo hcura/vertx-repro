@@ -16,18 +16,20 @@ java {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     implementation(enforcedPlatform("io.grpc:grpc-bom:1.69.0"))
-    implementation(platform("io.vertx:vertx-stack-depchain:5.0.0.CR5"))
+//    implementation(platform("io.vertx:vertx-stack-depchain:5.0.0.CR5"))
 
-    implementation("io.vertx:vertx-core")
-    implementation("io.vertx:vertx-web")
-    implementation("io.vertx:vertx-grpcio-server")
-    implementation("io.vertx:vertx-grpcio-client")
+    implementation("io.netty:netty-bom:4.2.0.RC4")
+    implementation("io.vertx:vertx-core:5.0.0-SNAPSHOT")
+    implementation("io.vertx:vertx-web:5.0.0-SNAPSHOT")
+    implementation("io.vertx:vertx-grpcio-server:5.0.0-SNAPSHOT")
+    implementation("io.vertx:vertx-grpcio-client:5.0.0-SNAPSHOT")
     // TODO: WORKS WITHOUT THIS / FAILS WITH THIS
-//    implementation("io.vertx:vertx-grpcio-context-storage")
+    implementation("io.vertx:vertx-grpcio-context-storage:5.0.0-SNAPSHOT")
     implementation("io.grpc:grpc-api")
     implementation("io.grpc:grpc-protobuf")
     implementation("io.grpc:grpc-stub")

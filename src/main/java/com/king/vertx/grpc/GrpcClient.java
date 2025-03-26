@@ -7,6 +7,7 @@ import io.grpc.InsecureChannelCredentials;
 import io.grpc.StatusRuntimeException;
 
 public class GrpcClient {
+
     public static void main(String[] args) {
         new GrpcClient().start();
     }
@@ -23,4 +24,5 @@ public class GrpcClient {
             System.out.println("Client: " + sre.getMessage());
         }
     }
+
 }
