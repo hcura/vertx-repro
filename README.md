@@ -1,27 +1,17 @@
 # Vertx repro
 
-A sample repro that shows context behaviour when using GRPC interceptors. It's a much simpler version of what we have internally, but it includes the key components.
+A sample repro that shows how `http-proxy` behaves with different threading models.
 
-It's split into server + client.
+Everything works with `event-loop` threading model but fails with `worker` threading model.
 
 ## Server
 
- - Starts a server on port 8081 with a router (not needed, but it replicates our internal use case) + grpc handler.
- - Bridges a grpc service with an interceptor
- - Interceptor sets some context which is used by the service impl
+ * Starts two servers:
+   * proxy: 8081
+   * origin: 8082
 
-## Client
-
-Connects to the server and makes a simple call.
+Any call to `8081/proxy/*` gets proxied to  `8082/origin/*`.  
 
 ## Testing
 
-### Storage/Context
-By toggling the dependency `io.vertx:vertx-grpcio-context-storage`.
-
-- The client returns `"context"` when the dependency is missing - which means the service is able to get the value from the context and return it
-- The client returns `UNKNOWN` when the dependency is present - due to failing to find the context on the server side.
-
-### CR5 issues with ThreadingModel.WORKER and EVENT_LOOP
-
-- Run the `GrpClientTest` and change threading model accordingly in `GrpcServer`.
+`ServerTest` showcases the behaviour. Change the `ThreadingModel.WORKER` of the `HttpProxyVerticle` in `Server` to make the test pass. 
