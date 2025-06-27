@@ -8,4 +8,4 @@ A sample repro that shows how multipart with webclient + http2 fails. It works w
 
 ## Testing
 
-`ServerTest` showcases the behaviour using webclient. Change the `ThreadingModel.WORKER` of the `HttpProxyVerticle` in `Server` to make the test pass. 
+`ServerTest` showcases the behaviour using webclient.
