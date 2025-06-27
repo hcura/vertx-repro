@@ -16,11 +16,10 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("io.vertx:vertx-stack-depchain:5.0.0.CR6"))
+    implementation(platform("io.vertx:vertx-stack-depchain:5.0.1"))
 
     implementation("io.vertx:vertx-core")
     implementation("io.vertx:vertx-web")
-    implementation("io.vertx:vertx-http-proxy")
     implementation("io.vertx:vertx-web-client")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
